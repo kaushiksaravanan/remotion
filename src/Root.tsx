@@ -9,6 +9,7 @@ import {PuredMediaAd} from './PuredMedia';
 import {ClavicularAd} from './ClavicularAd';
 import {GymFormAd} from './GymFormAd';
 import {ClaudeCodeAd} from './ClaudeCodeAd';
+import {SendblueAd} from './SendblueAd';
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -101,6 +102,15 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="ClaudeCodeAd"
         component={ClaudeCodeAd}
+        durationInFrames={900}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={{}}
+      />
+      <Composition
+        id="SendblueAd"
+        component={SendblueAd}
         durationInFrames={900}
         fps={30}
         width={1920}
