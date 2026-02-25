@@ -1,119 +1,56 @@
 import {Composition} from 'remotion';
-import {HelloWorld} from './HelloWorld';
-import {CountdownTimer} from './CountdownTimer';
-import {FontTest} from './FontTest';
-import {Clawdbot} from './Clawdbot';
-import {SecretMission} from './SecretMission';
-import {KalshiAd} from './KalshiAd';
-import {PuredMediaAd} from './PuredMedia';
-import {ClavicularAd} from './ClavicularAd';
-import {GymFormAd} from './GymFormAd';
-import {ClaudeCodeAd} from './ClaudeCodeAd';
-import {SendblueAd} from './SendblueAd';
+import {Static1GreenBubble} from './SendblueStatics/Static1GreenBubble';
+import {Static2FunnelFlow} from './SendblueStatics/Static2FunnelFlow';
+import {Static3VSLvsIMessage} from './SendblueStatics/Static3VSLvsIMessage';
+import {Static4Warning} from './SendblueStatics/Static4Warning';
+import {Static5DeliveryChannel} from './SendblueStatics/Static5DeliveryChannel';
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* Sendblue Static Creatives (1080x1080, ~5s each) */}
       <Composition
-        id="HelloWorld"
-        component={HelloWorld}
+        id="Static1GreenBubble"
+        component={Static1GreenBubble}
         durationInFrames={150}
         fps={30}
-        width={1920}
+        width={1080}
         height={1080}
-        defaultProps={{
-          titleText: 'Hello from Remotion',
-          titleColor: '#ffffff',
-        }}
+        defaultProps={{}}
       />
       <Composition
-        id="CountdownTimer"
-        component={CountdownTimer}
-        durationInFrames={330}
-        fps={30}
-        width={1920}
-        height={1080}
-        defaultProps={{
-          from: 10,
-          to: 0,
-        }}
-      />
-      <Composition
-        id="FontTest"
-        component={FontTest}
-        durationInFrames={180}
-        fps={30}
-        width={1920}
-        height={1080}
-      />
-      <Composition
-        id="Clawdbot"
-        component={Clawdbot}
-        durationInFrames={780}
+        id="Static2FunnelFlow"
+        component={Static2FunnelFlow}
+        durationInFrames={150}
         fps={30}
         width={1080}
-        height={1920}
-      />
-      <Composition
-        id="SecretMission"
-        component={SecretMission}
-        durationInFrames={1170}
-        fps={30}
-        width={1920}
         height={1080}
         defaultProps={{}}
       />
       <Composition
-        id="KalshiAd"
-        component={KalshiAd}
-        durationInFrames={600}
-        fps={30}
-        width={1920}
-        height={1080}
-        defaultProps={{}}
-      />
-      <Composition
-        id="PuredMediaAd"
-        component={PuredMediaAd}
-        durationInFrames={240}
-        fps={24}
-        width={1920}
-        height={1080}
-        defaultProps={{}}
-      />
-      <Composition
-        id="ClavicularAd"
-        component={ClavicularAd}
-        durationInFrames={300}
+        id="Static3VSLvsIMessage"
+        component={Static3VSLvsIMessage}
+        durationInFrames={150}
         fps={30}
         width={1080}
-        height={1920}
-        defaultProps={{}}
-      />
-      <Composition
-        id="GymFormAd"
-        component={GymFormAd}
-        durationInFrames={450}
-        fps={30}
-        width={1920}
         height={1080}
         defaultProps={{}}
       />
       <Composition
-        id="ClaudeCodeAd"
-        component={ClaudeCodeAd}
-        durationInFrames={900}
+        id="Static4Warning"
+        component={Static4Warning}
+        durationInFrames={150}
         fps={30}
-        width={1920}
+        width={1080}
         height={1080}
         defaultProps={{}}
       />
       <Composition
-        id="SendblueAd"
-        component={SendblueAd}
-        durationInFrames={900}
+        id="Static5DeliveryChannel"
+        component={Static5DeliveryChannel}
+        durationInFrames={150}
         fps={30}
-        width={1920}
+        width={1080}
         height={1080}
         defaultProps={{}}
       />

@@ -84,6 +84,7 @@ Custom agents are defined as markdown files in `.claude/agents/`. Claude Code au
 |---|---|---|
 | **composition-designer** | sonnet | Building or modifying compositions — researches APIs, designs structure, writes code, sets up media, installs packages |
 | **render-debugger** | sonnet | Diagnosing render failures — reads code + docs, identifies root cause, provides fix |
+| **media-fetcher** | haiku | Fetching real visual assets — logos, headshots, product photos, icons. Searches Wikimedia Commons first, then the web. Downloads into `public/media/`. Use whenever a composition needs real imagery |
 
 ---
 
@@ -93,6 +94,7 @@ Custom agents are defined as markdown files in `.claude/agents/`. Claude Code au
 
 ```
 User request
+  ├── media-fetcher (downloads any needed brand logos to public/logos/)
   ├── composition-designer (researches, designs, writes complete code)
   ├── Orchestrator registers in Root.tsx
   └── Orchestrator renders still via background Bash
@@ -128,6 +130,18 @@ URL or brand mentioned
 
 Use `mcp__playwright__browser_navigate` + `mcp__playwright__browser_take_screenshot` to capture the site. Use `mcp__playwright__browser_snapshot` to inspect specific elements (colors, fonts). This is far more reliable than guessing brand colors or styles from memory.
 
+### Archive Compositions
+
+When the user says "archive" compositions, this means removing them from Remotion Studio so only active work is visible:
+
+1. **Move source files** to `src/_archive/` — preserves the code without deleting it
+2. **Remove imports + `<Composition>` registrations** from `Root.tsx` — only active compositions remain
+3. **Fix import paths** in archived files — e.g. `../load-fonts` becomes `../../load-fonts` since the file moved one level deeper
+4. **Fix import paths** in active files that referenced archived code — e.g. `../SendblueAd/` becomes `../_archive/SendblueAd/`
+5. **Verify** with a quick render still to confirm nothing broke
+
+To **unarchive**: reverse the process — move files back from `src/_archive/`, re-add imports and `<Composition>` entries to Root.tsx, fix paths.
+
 ### Orchestration Rules
 
 1. **Research before code** — Dispatch `composition-designer` for non-trivial Remotion work.
@@ -138,6 +152,7 @@ Use `mcp__playwright__browser_navigate` + `mcp__playwright__browser_take_screens
 6. **Still before full render** — Render a still at a key frame first. Full video only when the user is satisfied.
 7. **Package check** — Verify `package.json` before using optional `@remotion/*` packages.
 8. **Visual research via Playwright** — When a composition references a website or brand, use Playwright MCP to screenshot the site and extract visual identity (logos, colors, typography) before designing. Don't guess brand details from memory.
+9. **Real assets via media-fetcher** — When a composition needs real imagery (logos, headshots, photos, icons), dispatch `media-fetcher` to find and download them. Searches Wikimedia Commons first, then the web. Never fake recognizable brands or people with placeholder SVGs. Run media-fetcher in parallel with composition-designer when possible.
 
 ---
 
