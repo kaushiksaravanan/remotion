@@ -6,16 +6,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Programmatic video generation project built with [Remotion](https://www.remotion.dev/) v4, React 19, and TypeScript. Uses Bun as the package manager and runtime.
 
-### Creative Direction
-
-The visual style of this project is inspired by **Studio Tendril** — a motion design studio known for high-end, organic motion graphics. Compositions should aim for:
-
-- **Fluid, organic motion** — smooth morphing shapes, flowing forms, particle-like systems. Favor springs with natural damping over linear easing.
-- **Abstract visual storytelling** — bold color palettes, geometric compositions, surreal environments. Prioritize visual impact over literal representation.
-- **Tactile, physical quality** — animations should feel like they have weight and materiality (soft bounces, elastic deformations, subtle noise-driven perturbation).
-- **Sophisticated color** — rich gradients, deliberate palette choices, interpolated color transitions. Avoid flat/primary colors.
-- **Cinematic polish** — smooth transitions between scenes, layered depth, considered pacing. Every frame should look intentional.
-
 ## Commands
 
 ```bash
