@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bunx remotion studio src/index.ts --port=3002",
-    "render": "bunx remotion render src/index.ts HelloWorld out/video.mp4",
-    "render:still": "bunx remotion still src/index.ts HelloWorld out/still.png",
-    "render:programmatic": "bun render.mjs"
+    "dev": "node node_modules/@remotion/cli/remotion-cli.js studio src/index.ts --port=3002",
+    "render": "node node_modules/@remotion/cli/remotion-cli.js render src/index.ts PortfolioTypo out/portfolio.mp4 --browser-executable=\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
+    "render:still": "node node_modules/@remotion/cli/remotion-cli.js still src/index.ts PortfolioTypo out/still.png --browser-executable=\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
+    "render:programmatic": "node render.mjs"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.399",

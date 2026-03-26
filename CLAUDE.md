@@ -11,12 +11,19 @@ Programmatic video generation project built with [Remotion](https://www.remotion
 ```bash
 bun install                  # Install dependencies
 bun run dev                  # Open Remotion Studio (interactive preview)
-bun run render               # Render video to out/video.mp4 (CLI)
+bun run render               # Render full video to out/portfolio.mp4 (CLI)
 bun run render:still         # Render a single frame to out/still.png
 bun run render:programmatic  # Render via Node API (render.mjs)
-bunx remotion render src/index.ts <CompositionId> out/<name>.mp4   # Render any composition
-bunx remotion still src/index.ts <CompositionId> out/<name>.png --frame=<N>  # Render single frame
 ```
+
+### Manual render (any composition)
+
+```bash
+node node_modules/@remotion/cli/remotion-cli.js render src/index.ts <CompositionId> out/<name>.mp4 --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe"
+node node_modules/@remotion/cli/remotion-cli.js still  src/index.ts <CompositionId> out/<name>.png  --frame=<N> --browser-executable="C:\Program Files\Google\Chrome\Application\chrome.exe"
+```
+
+> **Note (Windows):** Bun does not create `.bin` shims on Windows. Use `node node_modules/@remotion/cli/remotion-cli.js` instead of `bunx remotion`. The `--browser-executable` flag is required because the bundled headless shell doesn't bind its debug port on this machine; system Chrome works.
 
 ## Architecture
 
@@ -87,17 +94,17 @@ User request
   ├── media-fetcher (downloads any needed brand logos to public/logos/)
   ├── composition-designer (researches, designs, writes complete code)
   ├── Orchestrator registers in Root.tsx
-  └── Orchestrator renders still via background Bash
+  └── Orchestrator renders full video via background Bash
 ```
 
 ### Multi-Composition Project
 
-Spawn one **composition-designer** per composition in parallel. Register all in Root.tsx. Render stills sequentially (one at a time).
+Spawn one **composition-designer** per composition in parallel. Register all in Root.tsx. Render full videos sequentially (one at a time).
 
 ### Quick Iteration
 
 ```
-User feedback → Edit code directly → Bash render still (background) → Show preview → Repeat
+User feedback → Edit code directly → Bash render full video (background) → Show output → Repeat
 ```
 
 ### Debug a Broken Render
@@ -139,7 +146,7 @@ To **unarchive**: reverse the process — move files back from `src/_archive/`, 
 3. **One render at a time** — Remotion saturates system resources per render.
 4. **Version lock** — All `@remotion/*` packages must be `4.0.399`.
 5. **Sequential registration** — Write the component file BEFORE adding its `<Composition>` to Root.tsx.
-6. **Still before full render** — Render a still at a key frame first. Full video only when the user is satisfied.
+6. **Always render full video** — After building or modifying a composition, always render the full video (not just a still). Use `bun run render` or the manual render command. Run renders in background.
 7. **Package check** — Verify `package.json` before using optional `@remotion/*` packages.
 8. **Visual research via Playwright** — When a composition references a website or brand, use Playwright MCP to screenshot the site and extract visual identity (logos, colors, typography) before designing. Don't guess brand details from memory.
 9. **Real assets via media-fetcher** — When a composition needs real imagery (logos, headshots, photos, icons), dispatch `media-fetcher` to find and download them. Searches Wikimedia Commons first, then the web. Never fake recognizable brands or people with placeholder SVGs. Run media-fetcher in parallel with composition-designer when possible.
